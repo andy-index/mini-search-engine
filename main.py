@@ -116,45 +116,46 @@ def union_function(query):
       
     return uni_var
      
-def tf_funct(query):
-    token_query = my_tokens(query)
-    
-    if not token_query:
-        return 'Invalid input. Please type something.'
 
-    tf_results = {}
-
-    for term in token_query:
-        tf_results[term] = {}
-        
-        for doc_name, tokens in token_dict.items():
-            freq = tokens.count(term)
-            if freq > 0:
-                tf_results[term][doc_name] = freq / len(tokens)
-        
-    return tf_results
-
-def idf_funct(query):
+def tf_idf_funct(query):
     token_query = my_tokens(query)
     
     if not token_query:
         return 'Invalid input. Please type something.'
         
     total_docs = len(token_dict)
-    idf_results = {}
+    doc_scores = {}
     
-    for term in token_query:
-        if term in inverted_dict:
-            # Number of documents containing the term
-            doc_count = len(inverted_dict[term])
-            # Calculate IDF using natural logarithm
-            idf_results[term] = math.log(total_docs / doc_count)
-        else:
-            idf_results[term] = 0.0  # Term does not exist in the corpus
-            
-    return idf_results
-
-      
+    # Get all documents containing at least one query term using union_function
+    matched_docs = union_function(query)
+    if isinstance(matched_docs, str):
+        return matched_docs # Returns error string if no matches found
+        
+    # Calculate final aggregated score for each document
+    for doc in matched_docs:
+        tokens = token_dict[doc]
+        doc_length = len(tokens)
+        final_doc_score = 0.0
+        
+        for term in token_query:
+            if doc_length > 0:
+                # Normalized Term Frequency (count / total words in document)
+                tf = tokens.count(term) / doc_length
+            else:
+                tf = 0.0
+                
+            if tf > 0 and term in inverted_dict:
+                doc_count = len(inverted_dict[term])
+                idf = math.log(total_docs / doc_count)
+                
+                # Accumulate the (TF * IDF) score for this term into the document's total score
+                final_doc_score += tf * idf
+                
+        # Store the final aggregated score for the document
+        doc_scores[doc] = round(final_doc_score, 4)
+                
+    return doc_scores
+     
 while True:
    
     # Ask user for input 
@@ -164,7 +165,7 @@ while True:
     if query == ':quit':
         break
     
-    results = tf_funct(query)
+    results = tf_idf_funct(query)
     print(results)
     #print(union_function(query))
 
