@@ -1,5 +1,6 @@
 import string
 import os
+import math
 
 # IMPORTANT NOTE: Code works perfectly fine, however, .DS_Store keeps bugging the process
 
@@ -115,8 +116,45 @@ def union_function(query):
       
     return uni_var
      
+def tf_funct(query):
+    token_query = my_tokens(query)
     
-       
+    if not token_query:
+        return 'Invalid input. Please type something.'
+
+    tf_results = {}
+
+    for term in token_query:
+        tf_results[term] = {}
+        
+        for doc_name, tokens in token_dict.items():
+            freq = tokens.count(term)
+            if freq > 0:
+                tf_results[term][doc_name] = freq / len(tokens)
+        
+    return tf_results
+
+def idf_funct(query):
+    token_query = my_tokens(query)
+    
+    if not token_query:
+        return 'Invalid input. Please type something.'
+        
+    total_docs = len(token_dict)
+    idf_results = {}
+    
+    for term in token_query:
+        if term in inverted_dict:
+            # Number of documents containing the term
+            doc_count = len(inverted_dict[term])
+            # Calculate IDF using natural logarithm
+            idf_results[term] = math.log(total_docs / doc_count)
+        else:
+            idf_results[term] = 0.0  # Term does not exist in the corpus
+            
+    return idf_results
+
+      
 while True:
    
     # Ask user for input 
@@ -125,8 +163,10 @@ while True:
     # Breaks out of the loop
     if query == ':quit':
         break
-
-    print(union_function(query))
+    
+    results = tf_funct(query)
+    print(results)
+    #print(union_function(query))
 
 
   
