@@ -152,9 +152,13 @@ def tf_idf_funct(query):
                 final_doc_score += tf * idf
                 
         # Store the final aggregated score for the document
-        doc_scores[doc] = round(final_doc_score, 4)
+        doc_scores[doc] = final_doc_score
+
+    # Sort documents by their score in descending order
+    # sorted() returns a list of tuples
+    sorted_doc_scores = sorted(doc_scores.items(), key = lambda x: x[1], reverse = True)
                 
-    return doc_scores
+    return sorted_doc_scores
      
 while True:
    
@@ -164,10 +168,20 @@ while True:
     # Breaks out of the loop
     if query == ':quit':
         break
+   
+    print(f"\nSearch results for: {query}\n")
     
+ 
     results = tf_idf_funct(query)
-    print(results)
-    #print(union_function(query))
+
+    if isinstance(results, str):
+        print(results)
+    
+    else:
+        for rank, (doc, score) in enumerate(results, start=1):
+            print(f"{rank}. {doc:<15} Score: {score:.5f}")
+    
+   
 
 
   
