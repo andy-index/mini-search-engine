@@ -1,8 +1,8 @@
 import string
 import os
 import math
-
-# IMPORTANT NOTE: Code works perfectly fine, however, .DS_Store keeps bugging the process
+import time
+import itertools
 
 def read_files():
     # Retrives a list of all files in this dir
@@ -59,7 +59,7 @@ for key, value in token_dict.items():
         else:
            inverted_dict[item].add(key)
 
-# inverted_dict now has the inverted index dictionary
+# NOTE: inverted_dict now has the inverted index dictionary
 
 def inter_function(query):
         # List of tokens from query in a variable
@@ -107,7 +107,7 @@ def union_function(query):
     elif not_key:
         print(f'No document contains the word(s): \'{'\' \''.join(not_key)}\'')
      
-   # token_query should NEVER be empty, if is, it should not reach this point 
+   # token_query should NEVER be empty, if so, it should not reach this point 
     uni_var = inverted_dict[token_query[0]].copy()
 
     for token in token_query[1:]:
@@ -129,8 +129,9 @@ def tf_idf_funct(query):
     # Get all documents containing at least one query term using union_function
     matched_docs = union_function(query)
     if isinstance(matched_docs, str):
-        return matched_docs # Returns error string if no matches found
-        
+        # Returns error string if no matches found
+        return matched_docs    
+     
     # Calculate final aggregated score for each document
     for doc in matched_docs:
         tokens = token_dict[doc]
@@ -141,6 +142,7 @@ def tf_idf_funct(query):
             if doc_length > 0:
                 # Normalized Term Frequency (count / total words in document)
                 tf = tokens.count(term) / doc_length
+
             else:
                 tf = 0.0
                 
@@ -158,8 +160,9 @@ def tf_idf_funct(query):
     # sorted() returns a list of tuples
     sorted_doc_scores = sorted(doc_scores.items(), key = lambda x: x[1], reverse = True)
                 
-    return sorted_doc_scores
-     
+    return sorted_doc_scores[:5]
+    
+ 
 while True:
    
     # Ask user for input 
@@ -168,11 +171,21 @@ while True:
     # Breaks out of the loop
     if query == ':quit':
         break
-   
-    print(f"\nSearch results for: {query}\n")
+
+    # Test performance in ms   
+    start = time.perf_counter()
+    results = tf_idf_funct(query)
+    end = time.perf_counter()
+    search_time = (end - start) * 1000
+
+    print(f"\nSearch results for: {query} (Latency: {search_time} ms)\n")
     
  
     results = tf_idf_funct(query)
+
+    # Version A: Boolean retrieval
+    ''' set_slice = set(itertools.islice(results, 0, 5))
+    print(set_slice) '''
 
     if isinstance(results, str):
         print(results)
