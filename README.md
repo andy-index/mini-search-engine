@@ -43,7 +43,7 @@ the primary question being explored by the MVP: how should documents be
 retrieved and ranked?
 
 ## How It Works
-
+```
 Documents
     ↓
 Tokenizer
@@ -59,6 +59,7 @@ Candidate Documents
 TF-IDF Ranking
     ↓
 Top Results
+```
 
 ## Product Decisions
 
@@ -96,8 +97,8 @@ git clone <your-repository-url>
 2. Move into the project directory:
 cd Mini-Search-Engine
 
-3. Make sure the documents/ directory contains the .txt files you want to search.
-Example:
+3. Make sure the documents/ directory contains the .txt files you want to search. Example:
+```
 Mini-Search-Engine/
 │
 ├── main.py
@@ -107,6 +108,7 @@ Mini-Search-Engine/
     ├── java.txt
     ├── redis.txt
     └── ...
+```
 
 4. Run the search engine:
 python main.py
@@ -127,7 +129,6 @@ Search results for: python backend
 To exit the program, enter:
 :quit
 
-
 ## Tests
 
 The search engine is currently tested using a collection of controlled text documents and predefined search queries.
@@ -145,19 +146,13 @@ Testing focuses on verifying the major stages of the search pipeline:
 
 ### Example Test Cases
 
-#### | Query | Expected Behaviour |
-| --- | --- |
-| Short | Much Longer Text 
-| App | Data |
-
-#### Query               Expected Behavior
-python              Returns documents containing python
-python backend              Returns and ranks documents containing the query terms
-python AND backend              Returns documents containing both terms
-python OR java              Returns documents containing either term
-nonexistentword             Returns a message indicating no matching documents were found
-Empty input             Returns an invalid-input message
-:quit               Exits the search program
+| Query | Expected Behaviour |
+|---|---|
+| python | Returns documents containing python |
+| python backend | Returns and ranks documents containing the query terms |
+| nonexistentword | Returns a message indicating no matching documents were found |
+| Empty input | Returns an invalid-input message |
+| :quit | Exits the search program |
 
 ### Ranking Tests
 
@@ -169,7 +164,6 @@ These controlled cases are used to verify that documents containing more relevan
 ### Current Testing Approach
 
 Testing is currently performed manually through predefined documents and queries. Automated unit tests may be added in a future iteration to validate individual components such as tokenization, Boolean retrieval, inverted-index construction, and TF-IDF calculations.
-
 
 ## Roadmap
 
