@@ -1,0 +1,3 @@
+Product Analytics and Funnel Optimization
+
+Product analytics focuses on tracking, measuring, and analyzing user behavior within digital products to improve user experience, increase retention, and maximize product growth. Analytical platforms like Mixpanel, Amplitude, and PostHog capture user event streams, such as clicks, sign-ups, and feature interactions. Key analytical metrics include Monthly Active Users (MAU), Customer Acquisition Cost (CAC), Lifetime Value (LTV), and churn rate. Funnel analysis maps out multi-step user paths to identify drop-off points in conversion flows, such as user onboarding or checkout processes. Cohort analysis tracks specific user cohorts over time to assess product stickiness and validate feature updates.

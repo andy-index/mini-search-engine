@@ -83,11 +83,93 @@ terms that are distinctive within the corpus.
 
 ## Running the Project
 
-[ ]
+Requirements
+Python 3.x
+No external libraries are required
+The project uses only Python's standard library.
+
+### Run Locally
+
+1. Clone the repository:
+git clone <your-repository-url>
+
+2. Move into the project directory:
+cd Mini-Search-Engine
+
+3. Make sure the documents/ directory contains the .txt files you want to search.
+Example:
+Mini-Search-Engine/
+│
+├── main.py
+├── README.md
+└── documents/
+    ├── python.txt
+    ├── java.txt
+    ├── redis.txt
+    └── ...
+
+4. Run the search engine:
+python main.py
+Depending on your system, you may need to use:
+python3 main.py
+
+5. Enter a search query when prompted:
+Search for a document: Type ':quit' when finished. python backend
+The search engine will return matching documents ranked by their TF-IDF relevance score.
+
+Example output:
+Search results for: python backend
+
+1. python.txt      Score: 2.47
+2. backend.txt     Score: 1.82
+3. api.txt         Score: 0.91
+
+To exit the program, enter:
+:quit
+
 
 ## Tests
 
-[  ]
+The search engine is currently tested using a collection of controlled text documents and predefined search queries.
+
+Testing focuses on verifying the major stages of the search pipeline:
+- Document loading
+- Text normalization and tokenization
+- Inverted-index construction
+- AND query behavior
+- OR query behavior
+- Missing search terms
+- Empty or invalid queries
+- TF-IDF score calculation
+- Search-result ranking
+
+### Example Test Cases
+
+#### | Query | Expected Behaviour |
+| --- | --- |
+| Short | Much Longer Text 
+| App | Data |
+
+#### Query               Expected Behavior
+python              Returns documents containing python
+python backend              Returns and ranks documents containing the query terms
+python AND backend              Returns documents containing both terms
+python OR java              Returns documents containing either term
+nonexistentword             Returns a message indicating no matching documents were found
+Empty input             Returns an invalid-input message
+:quit               Exits the search program
+
+### Ranking Tests
+
+TF-IDF ranking is tested using documents with intentionally different term frequencies.
+
+For example, if python appears frequently throughout the document collection while redis appears in only a small number of documents, redis should receive a higher inverse-document-frequency value.
+These controlled cases are used to verify that documents containing more relevant and distinctive query terms receive higher ranking scores.
+
+### Current Testing Approach
+
+Testing is currently performed manually through predefined documents and queries. Automated unit tests may be added in a future iteration to validate individual components such as tokenization, Boolean retrieval, inverted-index construction, and TF-IDF calculations.
+
 
 ## Roadmap
 
@@ -97,5 +179,4 @@ terms that are distinctive within the corpus.
 - [x] Boolean AND/OR queries
 - [x] TF-IDF ranking
 - [x] Top-k retrieval
-- [ ] Basic user interface
-- [ ] Benchmarking
+- [x] Benchmarking

@@ -1,0 +1,3 @@
+DevOps and Site Reliability Engineering
+
+Site Reliability Engineering (SRE) applies software engineering principles to infrastructure and IT operations problems to build highly scalable and reliable software systems. Pioneered by Google, SRE complements DevOps practices by formalizing system availability through metrics like Service Level Indicators (SLIs), Service Level Objectives (SLOs), and Error Budgets. SLIs measure system performance metrics like latency and throughput, while SLOs define target reliability goals. Error budgets quantify allowable downtime, balancing feature velocity against system stability. SRE teams automate operational tasks, conduct blameless post-mortems, and design self-healing infrastructure systems.

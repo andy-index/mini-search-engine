@@ -1,0 +1,3 @@
+Product Discovery and Continuous Research
+
+Product discovery is the continuous process of deeply understanding customer problems, validating user needs, and framing potential solutions before writing production code. Led by product managers, product designers, and lead engineers, discovery activities mitigate four primary risks: value risk (will users buy/use it?), usability risk (can users figure out how to use it?), feasibility risk (can engineering build it?), and business viability risk (does it fit company strategy?). Continuous user research, prototype testing, user interviews, and landing page experiments ensure engineering resources focus on high-impact product features.

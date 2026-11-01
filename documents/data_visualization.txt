@@ -1,0 +1,3 @@
+Data Visualization Principles and Tools
+
+Data visualization is the graphical representation of information and data using visual elements such as charts, graphs, maps, and dashboards. Effective data visualization translates complex numerical datasets into clear visual stories, enabling analysts, product managers, and executives to identify trends, outliers, and patterns quickly. Key design principles involve selecting appropriate chart types—such as scatter plots for correlation, bar charts for categorical comparison, and line graphs for time series analysis—while avoiding visual clutter. Popular visualization libraries in Python and JavaScript include Matplotlib, Seaborn, Plotly, and D3.js.

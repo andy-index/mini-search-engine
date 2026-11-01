@@ -1,0 +1,3 @@
+REST vs GraphQL API Technologies
+
+REST (Representational State Transfer) and GraphQL represent two prominent architectural paradigms for designing web services and client-server integrations. REST relies on standard HTTP methods and endpoint URIs to access resources, returning fixed data structures in JSON format. While REST is simple and widely adopted, complex client applications often suffer from over-fetching or under-fetching data across multiple round trips. GraphQL addresses these limitations by providing a flexible query language where clients specify the exact shape and fields of data required in a single request. GraphQL schema definitions and resolvers simplify client-side integration for data-dense frontend applications.

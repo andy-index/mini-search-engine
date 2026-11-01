@@ -1,0 +1,3 @@
+Title: Distributed Systems: Message Queues and Event Streaming
+
+Message queues and event streaming platforms provide asynchronous communication channels that decouple producers and consumers in distributed systems. Message queues, such as RabbitMQ, typically route tasks to worker instances and delete messages upon successful acknowledgment, facilitating load leveling and background job processing. Event streaming platforms, such as Apache Kafka, retain ordered streams of immutable events in a distributed log, allowing multiple consumer groups to replay, process, and analyze data streams independently. These architectures enhance system resilience, absorb traffic spikes, and enable real-time data pipelines across complex microservice ecosystems.

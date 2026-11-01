@@ -1,0 +1,3 @@
+Scrum versus Kanban Agile Frameworks
+
+Scrum and Kanban are two widely adopted Agile methodologies used by software engineering and product teams to manage workflow execution. Scrum structures work into fixed-length timeboxes called Sprints (typically two weeks), emphasizing planned team commitments, predefined team roles, and structured daily ceremonies. In contrast, Kanban is a continuous flow model centered around visual task boards and strict Work-In-Progress (WIP) limits. Kanban eliminates fixed sprint boundaries, prioritizing task throughput and continuous feature delivery. Teams often choose Kanban for maintenance and operational workflows, while Scrum suits complex, feature-driven product development.

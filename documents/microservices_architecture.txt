@@ -1,0 +1,3 @@
+Microservices and Modular System Design
+
+Microservices architecture is a software design approach that structures an application as a collection of small, loosely coupled, independently deployable services organized around specific business capabilities. Each microservice manages its own database and communicates with other services using lightweight APIs or messaging queues like Kafka and RabbitMQ. Compared to monolithic architectures where the entire codebase is deployed as a single unit, microservices enable independent scaling, technology stack flexibility, and isolated failure domains. However, microservices introduce operational complexity in service discovery, distributed logging, distributed tracing, and data consistency across service boundaries.

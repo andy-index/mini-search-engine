@@ -1,0 +1,3 @@
+Minimum Viable Product Strategy
+
+A Minimum Viable Product (MVP) is a foundational version of a new product that includes only the core features necessary to deliver value to early adopters and validate primary business hypotheses. Pioneered by the Lean Startup methodology, the MVP strategy aims to minimize time, effort, and engineering resources spent before gathering real customer feedback. MVPs enable rapid build-measure-learn feedback loops, allowing product teams to gather empirical data on real user interaction. Based on user feedback, product managers decide whether to pivot product strategy or persevere with iterative feature expansion.

@@ -1,0 +1,3 @@
+OKRs and Key Performance Indicators
+
+Objective and Key Results (OKRs) and Key Performance Indicators (KPIs) are strategic goal-setting frameworks used by technology organizations to align teams and measure measurable outcomes. Objectives define qualitative, ambitious goals that describe what a product team aims to achieve over a specific quarter or year. Key Results provide quantitative, time-bound metrics that determine whether the objective has been successfully met. KPIs, on the other hand, monitor ongoing operational health, such as system uptime, latency, or daily active users. Combining OKRs and KPIs ensures that software development efforts directly support top-level organizational strategies and business outcomes.

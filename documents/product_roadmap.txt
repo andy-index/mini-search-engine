@@ -1,0 +1,3 @@
+Product Roadmap Strategy and Prioritization
+
+A product roadmap is a high-level visual statement that communicates the strategic direction, priorities, and progress of a product over time. Rather than operating as a rigid fixed-date feature schedule, modern product roadmaps focus on problem statements, outcomes, and value themes. Prioritization frameworks help product managers evaluate competing feature requests against engineering constraints and business impact. Popular frameworks include the RICE model (Reach, Impact, Confidence, Effort), MoSCoW prioritization (Must-have, Should-have, Could-have, Won't-have), and the Value vs. Effort matrix. Effective roadmaps establish transparency across cross-functional engineering, design, marketing, and executive teams.

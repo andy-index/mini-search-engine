@@ -1,0 +1,3 @@
+Qualitative versus Quantitative Data Analysis
+
+Product management and business analysis rely on synthesizing both qualitative and quantitative data to guide product strategy. Quantitative data provides numerical, measurable information answering 'what', 'how many', or 'how often' questions through analytics platforms, SQL queries, surveys, and telemetry logs. Qualitative data provides descriptive contextual insights answering 'why' or 'how' questions through direct customer interviews, focus groups, usability testing, and open-ended feedback. While quantitative analytics reveals user behavior patterns and conversion drops at scale, qualitative analysis exposes the underlying human motivations and emotional friction points behind those numbers.

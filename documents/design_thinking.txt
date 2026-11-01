@@ -1,0 +1,3 @@
+Design Thinking in Product Innovation
+
+Design thinking is a human-centered, iterative problem-solving methodology widely applied in product design and innovation workflows. The process comprises five core phases: Empathize (understanding user needs through research), Define (framing user problems into actionable statements), Ideate (generating diverse creative ideas), Prototype (building quick, low-fidelity feature representations), and Test (validating prototypes with real users). By placing user needs at the center of feature creation, design thinking fosters creative innovation, reduces product failure rates, and ensures software engineering efforts align directly with human experience goals.
