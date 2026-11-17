@@ -186,14 +186,12 @@ def run_search():
 
         print(f"\nSearch results for: {query} (Latency: {search_time} ms)\n")
 
-        results = tf_idf_funct(query)
-
         # Version A: Boolean retrieval
         # ''' set_slice = set(itertools.islice(results, 0, 5))
         # print(set_slice) '''
 
         if isinstance(results, str):
-            return results
+            print(results)
         
         else:
             for rank, (doc, score) in enumerate(results, start=1):
