@@ -193,15 +193,14 @@ def run_search():
         # print(set_slice) '''
 
         if isinstance(results, str):
-            print(results)
+            return results
         
         else:
             for rank, (doc, score) in enumerate(results, start=1):
                 print(f"{rank}. {doc:<15} Score: {score:.5f}")
 
-if __name__ == "__name__":
+if __name__ == "__main__":
     run_search()
-   
 
 
   
