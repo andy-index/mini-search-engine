@@ -1,7 +1,5 @@
 # Mini Search Engine
 
-# Mini Search Engine
-
 A Python-based text search engine implementing fundamental information retrieval techniques, including inverted indexing, Boolean retrieval, and TF-IDF ranking.
 
 The project was developed to explore how search engines organize text documents, process queries, and rank results by relevance.
