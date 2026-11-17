@@ -28,6 +28,28 @@ The search engine processes documents through the following pipeline:
 
 The current command-line interface uses TF-IDF ranking. Boolean retrieval is implemented as separate search functions.
 
+## Example Usage
+
+The following example demonstrates a search query executed against the Cranfield dataset, containing 1,400 text documents.
+
+**Example query:** `aircraft wing design`
+
+**Output:**
+
+Search for a document: Type ':quit' when finished. aircraft wing design
+
+Search results for: aircraft wing design (Latency: 4.521833005128428 ms)
+
+1. 834.txt         Score: 0.18294
+2. 1168.txt        Score: 0.16147
+3. 31.txt          Score: 0.15343
+4. 1169.txt        Score: 0.14217
+5. 51.txt          Score: 0.13998
+
+The search engine retrieves matching documents using an inverted index, calculates TF-IDF relevance scores, and returns the five highest-ranked results.
+
+Results are displayed in descending order of relevance, with query execution time measured in milliseconds.
+
 ## Technologies Used
 
 - Python
