@@ -1,176 +1,116 @@
 # Mini Search Engine
 
-A lightweight search engine built in Python that indexes local text
-documents and retrieves results based on query relevance.
+# Mini Search Engine
 
-## Problem
+A Python-based text search engine implementing fundamental information retrieval techniques, including inverted indexing, Boolean retrieval, and TF-IDF ranking.
 
-Finding documents containing a keyword is straightforward. Ranking those
-documents according to how well they satisfy a user's query is more difficult.
+The project was developed to explore how search engines organize text documents, process queries, and rank results by relevance.
 
-This project explores how a small search product can provide relevant results
-without relying on an existing search engine framework.
+## Features
 
-## Target User
-
-Someone searching across a collection of local text documents who wants the
-most relevant documents returned first.
-
-## Product Goal
-
-Build the smallest useful search system capable of indexing documents,
-retrieving matches, and ranking them according to relevance.
-
-## Current Features
-
-- Document discovery and loading
-- Text normalization/tokenization
-- Inverted index
-- Single-term search
-- Multi-term AND queries
-- Multi-term OR queries
-
-## Non-Goals for MVP
-
-- Semantic/vector search
-- Embeddings
-- Elasticsearch
-- Distributed architecture
-- Microservices
-
-These capabilities could be useful at greater scale, but they do not address
-the primary question being explored by the MVP: how should documents be
-retrieved and ranked?
+- **Text preprocessing:** Lowercase normalization, punctuation removal, and tokenization.
+- **Inverted index:** Maps terms to the documents containing them using Python dictionaries and sets.
+- **Boolean retrieval:** Supports AND and OR operations for finding matching documents.
+- **TF-IDF ranking:** Calculates relevance scores using normalized term frequency and inverse document frequency.
+- **Top-5 results:** Returns up to five documents ranked by TF-IDF score.
+- **Command-line interface:** Accepts text queries and displays ranked results.
+- **Automated testing:** Includes unit tests, integration tests, and retrieval evaluation.
 
 ## How It Works
-```
-Documents
-    ↓
-Tokenizer
-    ↓
-Document Token Store
-    ↓
-Inverted Index
-    ↓
-Query Processor
-    ↓
-Candidate Documents
-    ↓
-TF-IDF Ranking
-    ↓
-Top Results
-```
 
-## Product Decisions
+The search engine processes documents through the following pipeline:
 
-### Why an inverted index?
+1. Read UTF-8 text files from the document directory.
+2. Normalize and tokenize their contents.
+3. Construct an inverted index mapping terms to documents.
+4. Tokenize incoming search queries.
+5. Find matching documents using the inverted index.
+6. Calculate TF-IDF scores for matching documents.
+7. Return the five highest-scoring results.
 
-Scanning every document for every search would become increasingly expensive.
-An inverted index maps each term to the documents containing that term,
-reducing the search space.
+The current command-line interface uses TF-IDF ranking. Boolean retrieval is implemented as separate search functions.
 
-### Why TF-IDF?
+## Technologies Used
 
-Raw term frequency alone does not account for document length or how common
-a term is throughout the collection. TF-IDF increases the importance of
-terms that are distinctive within the corpus.
+- Python
+- Python standard-library data structures
+- pytest
+- ir_datasets
+- ir-measures
 
-## Success Metrics
+## Getting Started
 
-- Ranking correctness on predefined test queries
-- Precision of top search results
-- Query latency
-- Index construction time
+**1. Clone the repository**
 
-## Running the Project
+Clone the repository to your computer and navigate into its root directory.
 
-Requirements
-Python 3.x
-No external libraries are required
-The project uses only Python's standard library.
+**2. Install dependencies**
 
-### Run Locally
+Run `python -m pip install -r requirements.txt`.
 
-1. Clone the repository:
-git clone <your-repository-url>
+**3. Import the dataset**
 
-2. Move into the project directory:
-cd Mini-Search-Engine
+Run `python import_cranfield.py`.
 
-3. Make sure the documents/ directory contains the .txt files you want to search. Example:
-```
-Mini-Search-Engine/
-│
-├── main.py
-├── README.md
-└── documents/
-    ├── python.txt
-    ├── java.txt
-    ├── redis.txt
-    └── ...
-```
+This downloads and exports the Cranfield collection into a local directory containing 1,400 text documents.
 
-4. Run the search engine:
-python main.py
-Depending on your system, you may need to use:
-python3 main.py
+**4. Start the search engine**
 
-5. Enter a search query when prompted:
-Search for a document: Type ':quit' when finished. python backend
-The search engine will return matching documents ranked by their TF-IDF relevance score.
+Run `python main.py`.
 
-Example output:
-Search results for: python backend
+Enter a text query to receive the five highest-ranked matching documents. Type `:quit` to exit.
 
-1. python.txt      Score: 2.47
-2. backend.txt     Score: 1.82
-3. api.txt         Score: 0.91
+## Testing
 
-To exit the program, enter:
-:quit
+The project includes automated tests for text preprocessing, inverted indexing, Boolean retrieval, TF-IDF scoring, and end-to-end search functionality.
 
-## Tests
+Run the test suite using:
 
-The search engine is currently tested using a collection of controlled text documents and predefined search queries.
+`python -m pytest tests/ -v`
 
-Testing focuses on verifying the major stages of the search pipeline:
-- Document loading
-- Text normalization and tokenization
-- Inverted-index construction
-- AND query behavior
-- OR query behavior
-- Missing search terms
-- Empty or invalid queries
-- TF-IDF score calculation
-- Search-result ranking
+## Evaluation
 
-### Example Test Cases
+Retrieval quality was measured using the Cranfield collection, which contains 1,400 documents and 225 evaluation queries.
 
-| Query | Expected Behaviour |
-|---|---|
-| python | Returns documents containing python |
-| python backend | Returns and ranks documents containing the query terms |
-| nonexistentword | Returns a message indicating no matching documents were found |
-| Empty input | Returns an invalid-input message |
-| :quit | Exits the search program |
+| Metric | Result |
+|---|---:|
+| Precision@3 | 0.2711 |
+| nDCG@5 | 0.2445 |
+| Average query latency | 23.992 ms |
+| Median query latency | 23.112 ms |
+| P95 query latency | 40.334 ms |
+| Warm indexing time | 50.34 ms |
+| Unique indexed terms | 7,493 |
 
-### Ranking Tests
+**Evaluation methodology:** Retrieval quality was calculated using Cranfield's relevance judgments. Negative relevance labels were treated as zero. Precision@3 treats positive relevance grades as relevant, while nDCG@5 uses graded relevance.
 
-TF-IDF ranking is tested using documents with intentionally different term frequencies.
+Latency was measured across 225 queries against an already constructed in-memory index. The indexing benchmark includes reading, tokenizing, and building the index during a subsequent warm pass.
 
-For example, if python appears frequently throughout the document collection while redis appears in only a small number of documents, redis should receive a higher inverse-document-frequency value.
-These controlled cases are used to verify that documents containing more relevant and distinctive query terms receive higher ranking scores.
+Results may vary based on hardware and runtime conditions.
 
-### Current Testing Approach
+To reproduce the evaluations:
 
-Testing is currently performed manually through predefined documents and queries. Automated unit tests may be added in a future iteration to validate individual components such as tokenization, Boolean retrieval, inverted-index construction, and TF-IDF calculations.
+- `python benchmarks/evaluate_relevance.py`
+- `python benchmarks/benchmark_performance.py`
 
-## Roadmap
+## Current Limitations
 
-- [x] Document ingestion
-- [x] Tokenization
-- [x] Inverted indexing
-- [x] Boolean AND/OR queries
-- [x] TF-IDF ranking
-- [x] Top-k retrieval
-- [x] Benchmarking
+- Supports local text documents rather than web pages or other media types.
+- Uses basic tokenization without stemming or lemmatization.
+- Returns only the five highest-scoring documents.
+- Stores the document collection and inverted index in memory.
+- Uses straightforward TF-IDF scoring without more advanced ranking techniques.
+
+## Potential Improvements
+
+- Precompute document term frequencies to improve query performance.
+- Implement persistent indexing.
+- Introduce improved normalization and stemming.
+- Compare TF-IDF against BM25 ranking.
+- Evaluate scalability using larger document collections.
+
+## Dataset
+
+This project uses the Cranfield information retrieval dataset, accessed through the ir_datasets library.
+
+https://ir-datasets.com/cranfield.html

@@ -1,34 +1,26 @@
-# Python cache
+
+# Python
 __pycache__/
-*.pyc
-*.pyo
-
-# Virtual environments
-venv/
-.venv/
-env/
-
-# Environment variables / secrets
-.env
-.env.*
-
-# IDEs
-.vscode/
-.idea/
-
-# macOS
-.DS_Store
-
-# Testing / tooling
+*.py[cod]
 .pytest_cache/
 .coverage
+htmlcov/
 
-# Build files
-build/
-dist/
-*.egg-info/
+# Virtual environments
+.venv/
+venv/
+env/
 
-# Notes file
-NOTES.md
+# Local datasets
+documents/
+documents_cranfield/
+documents_test/
 
+# Editor and operating system
+.vscode/
+.DS_Store
 
+# Environment and secrets
+.env
+.env.*
+!.env.example

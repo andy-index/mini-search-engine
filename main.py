@@ -6,14 +6,14 @@ import itertools
 
 def read_files():
     # Retrives a list of all files in this dir
-    file_list = os.listdir('documents/')
+    file_list = os.listdir('documents_cranfield/')
 
     raw_dict = {}
 
     # For each file in the list
     for file in file_list:
         if file.endswith('.txt'):
-            with open(f"documents/{file}", mode='r', encoding='utf-8-sig') as file_name:
+            with open(f"documents_cranfield/{file}", mode='r', encoding='utf-8-sig') as file_name:
                 docu = file_name.read()
                 raw_dict.update({file: docu})
 
@@ -44,22 +44,28 @@ def tokenized_dict():
     return file_dict
 
 # Inverted index     
-token_dict = tokenized_dict()
-inverted_dict = {}
+def build_inverted_index(token_dict):
+    inverted_index = {}
 
-# Outer loop to iterate over key:value pairs
-for key, value in token_dict.items():
-    
-    # Inner loop to iterate over the values
-    for item in value:
+    # Outer loop to iterate over key:value pairs
+    for key, value in token_dict.items():
         
-        # If value DOES NOT exist as a key in the new dict, it transforms into a key in the new dict
-        if item not in inverted_dict.keys():
-            inverted_dict.update({item: {key}})
-        else:
-           inverted_dict[item].add(key)
+        # Inner loop to iterate over the values
+        for item in value:
+            
+            # If value DOES NOT exist as a key in the new dict, it transforms into a key in the new dict
+            if item not in inverted_index.keys():
+                inverted_index.update({item: {key}})
+            else:
+                inverted_index[item].add(key)
+
+    return inverted_index
+
+token_dict = tokenized_dict()
 
 # NOTE: inverted_dict now has the inverted index dictionary
+inverted_dict = build_inverted_index(token_dict)
+
 
 def inter_function(query):
         # List of tokens from query in a variable
@@ -162,38 +168,39 @@ def tf_idf_funct(query):
                 
     return sorted_doc_scores[:5]
     
- 
-while True:
-   
-    # Ask user for input 
-    query = input('Search for a document: Type \':quit\' when finished. ')
-    
-    # Breaks out of the loop
-    if query == ':quit':
-        break
+def run_search():
+    while True:
 
-    # Test performance in ms   
-    start = time.perf_counter()
-    results = tf_idf_funct(query)
-    end = time.perf_counter()
-    search_time = (end - start) * 1000
+        # Ask user for input 
+        query = input('Search for a document: Type \':quit\' when finished. ')
+        
+        # Breaks out of the loop
+        if query == ':quit':
+            break
 
-    print(f"\nSearch results for: {query} (Latency: {search_time} ms)\n")
-    
- 
-    results = tf_idf_funct(query)
+        # Test performance in ms   
+        start = time.perf_counter()
+        results = tf_idf_funct(query)
+        end = time.perf_counter()
+        search_time = (end - start) * 1000
 
-    # Version A: Boolean retrieval
-    ''' set_slice = set(itertools.islice(results, 0, 5))
-    print(set_slice) '''
+        print(f"\nSearch results for: {query} (Latency: {search_time} ms)\n")
 
-    if isinstance(results, str):
-        print(results)
-    
-    else:
-        for rank, (doc, score) in enumerate(results, start=1):
-            print(f"{rank}. {doc:<15} Score: {score:.5f}")
-    
+        results = tf_idf_funct(query)
+
+        # Version A: Boolean retrieval
+        # ''' set_slice = set(itertools.islice(results, 0, 5))
+        # print(set_slice) '''
+
+        if isinstance(results, str):
+            print(results)
+        
+        else:
+            for rank, (doc, score) in enumerate(results, start=1):
+                print(f"{rank}. {doc:<15} Score: {score:.5f}")
+
+if __name__ == "__name__":
+    run_search()
    
 
 
